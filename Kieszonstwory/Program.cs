@@ -51,8 +51,23 @@ namespace Kieszonstwory
                 SeedRolesAndAdminAsync(services).GetAwaiter().GetResult();
             }
 
-            
-        
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    var context = services.GetRequiredService<AplikacjaDbContext>();
+                    context.Database.Migrate(); 
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "B³¹d podczas migracji bazy danych");
+                }
+            }
+
+
+
 
             app.Run();
         }
