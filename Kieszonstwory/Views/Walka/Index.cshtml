@@ -1,0 +1,171 @@
+﻿@model Kieszonstwory.Models.Walka
+
+@{
+    Layout = "_Layout";
+}
+@{
+    string backgroundImage = "/Obrazki/Map.png";
+
+    if (Model.LokalizacjaId != null)
+    {
+        switch (Model.LokalizacjaId)
+        {
+            case 1:
+                backgroundImage = "/Obrazki/gory.png";
+                break;
+            case 2:
+                backgroundImage = "/Obrazki/polana.png";
+                break;
+            case 3:
+                backgroundImage = "/Obrazki/wybrzeze.png";
+                break;
+        }
+    }
+}
+<style>
+    body {
+        background-image: url('@backgroundImage');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 100vh;
+        margin: 0;
+    }
+    .battle-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        height: 100vh;
+        gap: 10px;
+        padding: 20px;
+    }
+
+    .battle-box {
+        background-color: rgba(255, 255, 255, 0.9);
+        border: 2px solid #ccc;
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 1.2rem;
+    }
+
+        .battle-box img {
+            max-width: 80%;
+            height: auto;
+        }
+
+        .battle-box button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+        }
+
+    @@keyframes shake {
+        0%
+
+    {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-10px);
+    }
+
+    50% {
+        transform: translateX(10px);
+    }
+
+    75% {
+        transform: translateX(-10px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+
+    }
+
+    .shake {
+        animation: shake 0.4s;
+    }
+</style>
+
+<div class="container text-center battle-grid">
+
+    <!-- Górna lewa -->
+    <div class="battle-box">
+        <form id="formAtak" asp-controller="Walka" asp-action="Atak" method="post">
+            <input type="hidden" name="tdziki.Id" value="@Model.DzikiStwor.Id" />
+            <input type="hidden" name="tdziki.HP" value="@Model.DzikiStwor.HP" />
+            <input type="hidden" name="tdziki.Poziom" value="@Model.DzikiStwor.Poziom" />
+            <input type="hidden" name="tdziki.Moc" value="@Model.DzikiStwor.Moc" />
+
+            <input type="hidden" name="tmoj.Id" value="@Model.Kieszonstwor.Id" />
+            <input type="hidden" name="tmoj.HP" value="@Model.Kieszonstwor.HP" />
+            <input type="hidden" name="tmoj.Poziom" value="@Model.Kieszonstwor.Poziom" />
+            <input type="hidden" name="tmoj.Moc" value="@Model.Kieszonstwor.Moc" />
+
+            <button type="button" onclick="atakuj()" class="btn btn-danger btn-lg mb-3">Atak</button>
+        </form>
+
+        <form asp-action="Lap" method="post">
+            <input type="hidden" name="tdziki.Id" value="@Model.DzikiStwor.Id" />
+            <input type="hidden" name="tdziki.Moc" value="@Model.DzikiStwor.Moc" />
+            <input type="hidden" name="tdziki.BaseHP" value="@Model.DzikiStwor.BaseHP" />
+            <input type="hidden" name="tdziki.Poziom" value="@Model.DzikiStwor.Poziom" />
+            <input type="hidden" name="tdziki.HP" value="@Model.DzikiStwor.HP" />
+            <button class="btn btn-warning btn-lg">Łap</button>
+        </form>
+        <form method="post" action="@Url.Action("WybierzDoWalki", "Kieszonstwory")">
+            <input type="hidden" name="walkaId" value="@Model.Id" />
+            <button type="submit" class="btn btn-secondary btn-lg">Zmień stworka</button>
+        </form>
+    </div>
+
+    <!-- Górna prawa-->
+    <div class="battle-box">
+        <img id="imgDziki" src="/Stworki/@Model.DzikiStwor.Obrazek" alt="@Model.DzikiStwor.Nazwa" style="max-height: 200px;" />
+        <div class="mt-2">
+            <strong>@Model.DzikiStwor.Nazwa</strong><br />
+            <span>Poziom: @Model.DzikiStwor.Poziom</span><br />
+            <span>HP: @Model.DzikiStwor.HP</span>
+        </div>
+    </div>
+
+    <!-- Dolna lewa-->
+    <div class="battle-box">
+        <img id="imgSwoj" src="/Stworki/@Model.Kieszonstwor.Obrazek" alt="@Model.Kieszonstwor.Nazwa" style="max-height: 200px;" />
+        <div class="mt-2">
+            <strong>@Model.Kieszonstwor.Nazwa</strong><br />
+            <span>Poziom: @Model.Kieszonstwor.Poziom</span><br />
+            <span>HP: @Model.Kieszonstwor.HP</span>
+        </div>
+    </div>
+
+    <!-- Dolna prawa:-->
+    <div class="battle-box">
+        @if (!string.IsNullOrEmpty(Model.Komunikat))
+        {
+            <div class="alert alert-info mt-3">
+                @Model.Komunikat
+            </div>
+        }
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        function atakuj() {
+            const moj = document.getElementById('imgSwoj');
+            moj.classList.add('shake');
+
+            setTimeout(() => {
+                const form = document.getElementById('formAtak');
+                form.submit();
+            }, 400); 
+        }
+    </script>
+}

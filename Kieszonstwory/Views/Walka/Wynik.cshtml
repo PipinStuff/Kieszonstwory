@@ -1,0 +1,25 @@
+﻿@model Kieszonstwory.Models.Wynik
+
+@{
+    ViewData["Title"] = "Wynik Walki";
+}
+
+<div class="container text-center mt-5">
+
+    <h2 class="mb-4">@Model.Komunikat</h2>
+
+    @if (Model.Łapany && Model.kieszonstwor != null)
+    {
+        <div class="card mx-auto mb-4" style="width: 18rem;">
+            <img class="card-img-top" src="/Stworki/@Model.kieszonstwor.Obrazek" alt="@Model.kieszonstwor.Nazwa">
+            <div class="card-body">
+                <h5 class="card-title">@Model.kieszonstwor.Nazwa</h5>
+                <p class="card-text">Poziom: @Model.kieszonstwor.Poziom</p>
+                <p class="card-text">HP: @Model.kieszonstwor.HP</p>
+                <p class="card-text">Moc: @Model.kieszonstwor.Moc</p>
+            </div>
+        </div>
+    }
+
+    <a href="@Url.Action("Index", "Lokalizacje")" class="btn btn-primary btn-lg">Powrót do Mapy</a>
+</div>

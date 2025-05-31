@@ -1,0 +1,23 @@
+﻿@model Kieszonstwory.Models.TypStwora
+@{
+    ViewData["Title"] = "Edytuj Typ Stwora";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Edytuj typ stwora</h2>
+
+    <form asp-action="EdytujTyp" method="post">
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group mb-3">
+            <label asp-for="Nazwa" class="form-label">Nazwa typu</label>
+            <input asp-for="Nazwa" class="form-control" />
+            <span asp-validation-for="Nazwa" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="Opis" class="form-label">Opis</label>
+            <textarea asp-for="Opis" class="form-control" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+        <a asp-action="ListaTypow" class="btn btn-secondary ms-2">Anuluj</a>
+    </form>
+</div>

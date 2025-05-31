@@ -1,0 +1,43 @@
+﻿@model List<Kieszonstwory.Models.DzikiStwor>
+@{
+    ViewData["Title"] = "Zarządzanie Stworkami";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Zarządzanie Stworkami</h2>
+
+    <a asp-action="DodajStworka" class="btn btn-success mb-3">Dodaj nowego stworka</a>
+
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Nazwa</th>
+                <th>TypId</th>
+
+                <th>Moc</th>
+                <th>HP</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var s in Model)
+            {
+                <tr>
+                    <td>@s.Nazwa</td>
+                    <td>@s.TypStworaId</td>
+
+                    <td>@s.Moc</td>
+                    <td>@s.BaseHP</td>
+                    <td>
+                        <a asp-action="EdytujStworka" asp-route-id="@s.Id" class="btn btn-primary btn-sm">Edytuj</a>
+                    </td>
+                    <td>
+                    <form asp-action="UsunStworka" asp-controller="Admin" method="post">
+                        <input type="hidden" name="id" value="@s.Id" />
+                        <button type="submit" class="btn btn-danger btn-sm">Usuń</button>
+                    </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

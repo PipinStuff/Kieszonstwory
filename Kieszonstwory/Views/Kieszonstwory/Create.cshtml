@@ -1,0 +1,31 @@
+﻿@model Kieszonstwory.Models.Kieszonstwor
+
+<h2>Dodaj Stworka</h2>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label for="Obrazek">Nazwa pliku obrazka (np. stworek.png):</label>
+        <input asp-for="Obrazek" class="form-control" />
+    </div>
+    <div>
+        <label asp-for="Nazwa"></label>
+        <input asp-for="Nazwa" />
+    </div>
+    <div>
+        <label asp-for="Poziom"></label>
+        <input asp-for="Poziom" />
+    </div>
+    <div>
+        <label asp-for="Moc"></label>
+        <input asp-for="Moc" />
+    </div>
+    <div>
+        <label asp-for="TypStworaId"></label>
+        <select asp-for="TypStworaId" asp-items="ViewBag.Typy"></select>
+    </div>
+    <div>
+        <label asp-for="LokalizacjaId"></label>
+        <select asp-for="LokalizacjaId" asp-items="ViewBag.Lokalizacje"></select>
+    </div>
+    <button type="submit">Zapisz</button>
+</form>

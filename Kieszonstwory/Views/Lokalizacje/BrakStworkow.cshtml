@@ -1,0 +1,9 @@
+﻿@{
+    ViewData["Title"] = "Błąd";
+}
+
+<div class="alert alert-warning mt-4">
+    <h3>Błąd</h3>
+    <p>@ViewBag.Message</p>
+    <a asp-action="Index" asp-controller="Lokalizacje" class="btn btn-primary">Powrót do listy lokalizacji</a>
+</div>

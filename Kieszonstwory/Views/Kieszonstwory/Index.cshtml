@@ -1,0 +1,106 @@
+﻿@model IEnumerable<Kieszonstwory.Models.Kieszonstwor>
+
+<h2>Moje Kieszonstwory</h2>
+@{
+    bool trybWalka = ViewBag.TrybWalka ?? false;
+    int? walkaId = ViewBag.WalkaId;
+}
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Obrazek</th>
+            <th>Nazwa</th>
+            <th>Poziom</th>
+            <th>Moc</th>
+            <th>HP</th>
+            <th>Typ</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.Obrazek))
+                    {
+                        <img src="~/Stworki/@item.Obrazek" alt="Stworek" style="width: 100px;" />
+                    }
+                    else
+                    {
+                        <span>Brak obrazka</span>
+                    }
+                </td>
+                <td>@item.Nazwa</td>
+                <td>@item.Poziom</td>
+                <td>@item.Moc</td>
+                <td>@item.BaseHP</td>
+                <td>@item.TypStwora?.Nazwa</td>
+                <td>
+                    <button class="fav-btn btn btn-link" data-id="@item.Id">
+                        @if (item.CzyFav)
+                        {
+                            <span class="text-warning">&#9733;</span> @* wypełniona gwiazdka *@
+                        }
+                        else
+                        {
+                            <span class="text-secondary">&#9734;</span> @* pusta gwiazdka *@
+                        }
+                    </button>
+                </td>
+                <td>
+                    @if (trybWalka)
+                    {
+                        <form asp-controller="Walka" asp-action="ZmienStworka" method="post">
+                            <input type="hidden" name="mojId" value="@item.Id" />
+                            <input type="hidden" name="walkaId" value="@walkaId" />
+                            <button type="submit" class="btn btn-success">Wybierz</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-action="Ulepsz" method="post" style="display:inline">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button class="btn btn-success">Ulepsz</button>
+                        </form>
+
+                        <form asp-action="Wymien" method="post" style="display:inline">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button class="btn btn-danger">Wymień na esencję</button>
+                        </form>
+                    }
+
+                </td>
+            </tr>
+        }
+        @if (!Model.Any())
+        {
+            <div class="mb-4">
+                <form asp-action="PrzydzielStartowego" method="post">
+                    <button type="submit" class="btn btn-warning btn-lg">Otrzymaj swojego pierwszego stworka</button>
+                </form>
+            </div>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+        document.querySelectorAll('.fav-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const id = this.getAttribute('data-id');
+                fetch(`/Kieszonstwory/UstawUlubionego/${id}`, {
+                    method: 'POST'
+                })
+                .then(() => location.reload());
+            });
+        });
+    </script>
+}

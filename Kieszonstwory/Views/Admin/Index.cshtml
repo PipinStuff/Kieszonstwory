@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Panel administratora";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Panel administratora</h2>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Zarządzanie stworkami</h5>
+                    <a href="@Url.Action("ListaStworkow", "Admin")" class="btn btn-primary">Przejdź</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Zarządzanie typami</h5>
+                    <a href="@Url.Action("ListaTypow", "Admin")" class="btn btn-secondary">Przejdź</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div >
+    <form asp-controller="Logowanie" asp-action="Logout" method="post">
+        <button type="submit" class="btn btn-danger btn-lg">Wyloguj się</button>
+    </form>
+</div>

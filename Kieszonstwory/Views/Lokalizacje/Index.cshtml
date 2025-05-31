@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Mapa";
+}
+
+<style>
+    body {
+        background-image: url('/Obrazki/Map.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        min-height: 100vh;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: sans-serif;
+    }
+
+    .location-panel {
+        background-color: white;
+        padding: 40px 60px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+        text-align: center;
+    }
+
+        .location-panel h2 {
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .location-panel a.btn {
+            display: block;
+            margin: 15px 0;
+            padding: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+</style>
+@if (ViewBag.Brak != null)
+{
+    <div class="alert alert-warning text-center">
+        @ViewBag.Brak
+    </div>
+}
+@if (ViewBag.Brak == null)
+{
+<div class="location-panel">
+    <h2>Wybierz lokalizację</h2>
+    <a asp-action="Wybrzeze" class="btn btn-primary btn-lg">🌊 Wybrzeże</a>
+    <a asp-action="Polana" class="btn btn-success btn-lg">🌿 Polana</a>
+    <a asp-action="Gory" class="btn btn-warning btn-lg">⛰️ Góry</a>
+</div>
+}

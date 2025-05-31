@@ -1,0 +1,33 @@
+﻿@model List<Kieszonstwory.Models.TypStwora>
+@{
+    ViewData["Title"] = "Zarządzanie Typami Stworków";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Zarządzanie Typami Stworków</h2>
+
+    <a asp-action="DodajTyp" class="btn btn-success mb-3">Dodaj nowy typ</a>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Opis</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var t in Model)
+            {
+                <tr>
+                    <td>@t.Nazwa</td>
+                    <td>@t.Opis</td>
+                    <td>
+                        <a asp-action="EdytujTyp" asp-route-id="@t.Id" class="btn btn-primary btn-sm">Edytuj</a>
+                        <a asp-action="UsunTyp" asp-route-id="@t.Id" class="btn btn-danger btn-sm">Usuń</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

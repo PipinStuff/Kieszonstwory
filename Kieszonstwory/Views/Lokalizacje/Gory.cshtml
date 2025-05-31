@@ -1,0 +1,40 @@
+﻿@model Kieszonstwory.Models.Lokalizacja
+@{
+    ViewData["Title"] = "Góry";
+}
+
+<h2 class="text-center">Góry</h2>
+<style>
+    body {
+        background-image: url('/Obrazki/gory.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 100vh;
+        margin: 0;
+    }
+</style>
+<div class="text-center mt-5">
+    <button id="eksplorujBtn" class="btn btn-primary btn-lg">Eksploruj</button>
+
+    <div id="spinner" class="mt-3" style="display: none;">
+        <div class="spinner-border text-info" role="status">
+            <span class="sr-only">Ładowanie...</span>
+        </div>
+        <p>Eksplorowanie lokalizacji...</p>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById('eksplorujBtn').addEventListener('click', function () {
+            const spinner = document.getElementById('spinner');
+            this.disabled = true;
+            spinner.style.display = 'block';
+
+            setTimeout(function () {
+                window.location.href = '@Url.Action("Index", "Walka")?idLokalizacji=@Model.Id';
+            }, 5000);
+        });
+    </script>
+}

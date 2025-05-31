@@ -1,0 +1,38 @@
+﻿@model Kieszonstwory.Models.Trener
+
+@{
+    ViewData["Title"] = "Profil trenera";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Profil Trenera</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="UpdateName" asp-controller="Trenerzy" method="post" class="mb-4">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group mb-3">
+                            <label asp-for="Name" class="form-label">Nazwa trenera:</label>
+                            <input asp-for="Name" class="form-control" required />
+                        </div>
+                        <button type="submit" class="btn btn-success">Zapisz nazwę</button>
+                    </form>
+
+                    <hr />
+
+                    <h5 class="mb-3 text-primary">Statystyki</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Poziom:</strong> @Model.Poziom</li>
+                        <li class="list-group-item"><strong>Doświadczenie (EXP):</strong> @Model.Exp</li>
+                        <li class="list-group-item"><strong>Złapane stworki:</strong> @Model.Złapane</li>
+                        <li class="list-group-item"><strong>Pokonane stworki:</strong> @Model.Pokonane</li>
+                        <li class="list-group-item"><strong>ID użytkownika:</strong> @Model.Id</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

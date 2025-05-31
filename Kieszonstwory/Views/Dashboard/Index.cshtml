@@ -1,0 +1,53 @@
+﻿@model Kieszonstwory.Models.Trener
+
+
+
+<style>
+    body {
+        background-image: url('/Obrazki/Map.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        min-height: 100vh;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: sans-serif;
+    }
+
+    .location-panel {
+        background-color: white;
+        padding: 40px 60px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+        text-align: center;
+    }
+
+        .location-panel h2 {
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .location-panel a.btn {
+            display: block;
+            margin: 15px 0;
+            padding: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+</style>
+
+
+
+<div class="location-panel">
+    <h2>Witaj @Model.Name</h2>
+
+    <a asp-controller="Lokalizacje" asp-action="Index" class="btn btn-primary btn-lg">Mapa</a>
+    <a asp-controller="Kieszonstwory" asp-action="Index" class="btn btn-success btn-lg">Stworki</a>
+    <a asp-controller="Trenerzy" asp-action="Index" class="btn btn-info btn-lg">Trener</a>
+
+    <form asp-controller="Logowanie" asp-action="Logout" method="post">
+        <button type="submit" class="btn btn-danger btn-lg">Wyloguj się</button>
+    </form>
+</div>

@@ -1,0 +1,22 @@
+﻿@model Kieszonstwory.Models.Kieszonstwor
+
+<h2>Szczegóły Stworka</h2>
+
+<dl>
+    <dt>Nazwa</dt>
+    <dd>@Model.Nazwa</dd>
+    <dt>Poziom</dt>
+    <dd>@Model.Poziom</dd>
+    <dt>Moc</dt>
+    <dd>@Model.Moc</dd>
+    <dt>HP</dt>
+    <dd>@Model.HP</dd>
+    <dt>Typ</dt>
+    <dd>@Model.TypStwora?.Nazwa</dd>
+    <dt>Lokalizacja</dt>
+    <dd>@Model.Lokalizacja?.Nazwa</dd>
+</dl>
+
+<p>
+    <a asp-action="Index">Powrót</a>
+</p>

@@ -1,0 +1,61 @@
+﻿@model Kieszonstwory.Models.Rejestracja
+
+@{
+    ViewData["Title"] = "Rejestracja";
+}
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="card shadow p-4" style="width: 100%; max-width: 500px;">
+        <h3 class="text-center mb-4">Załóż konto</h3>
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                    {
+                        <li>@error.ErrorMessage</li>
+                    }
+                </ul>
+            </div>
+        }
+
+        <form asp-action="Register" method="post">
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label"></label>
+                <input asp-for="Password" type="password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ConfirmPassword" class="form-label"></label>
+                <input asp-for="ConfirmPassword" type="password" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Nazwa" class="form-label"></label>
+                <input asp-for="Nazwa" type="text" class="form-control" />
+                <span asp-validation-for="Nazwa" class="text-danger small"></span>
+            </div>
+
+            <button type="submit" class="btn btn-success w-100 mt-2">Zarejestruj się</button>
+        </form>
+
+        <div class="text-center mt-3">
+            <a asp-action="Login" asp-controller="Logowanie">Masz już konto? Zaloguj się</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

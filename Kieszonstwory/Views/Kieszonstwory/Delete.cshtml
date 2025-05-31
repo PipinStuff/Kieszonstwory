@@ -1,0 +1,11 @@
+﻿@model Kieszonstwory.Models.Kieszonstwor
+
+<h2>Usuń Stworka</h2>
+
+<h4>Czy na pewno chcesz usunąć "@Model.Nazwa"?</h4>
+
+<form asp-action="DeleteConfirmed">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit">Usuń</button> |
+    <a asp-action="Index">Anuluj</a>
+</form>
