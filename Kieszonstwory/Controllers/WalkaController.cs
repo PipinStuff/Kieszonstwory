@@ -165,7 +165,7 @@ namespace Kieszonstwory.Controllers
             {
                 komunikat = $"Nie udało Ci się złapać {dziki.Nazwa}!. Osłabienie go powinno pomóc!";
             }
-                var moj = _context.Kieszonstwory.FirstOrDefault(); 
+                var moj = _context.Kieszonstwory.Where(x=>x.Id==MojID).FirstOrDefault(); 
 
             double dmgDziki = dziki.Moc * (_rng.NextDouble() + 0.5);
             moj.HP -= (int)Math.Round(dmgDziki);
