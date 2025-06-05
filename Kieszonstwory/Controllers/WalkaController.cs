@@ -120,6 +120,7 @@ namespace Kieszonstwory.Controllers
                 LokalizacjaId = lokalizacja.Id,
                 Komunikat = komunikat
             };
+          _context.Walka.Add(model);
             _context.SaveChanges();
             return View("Index", model);
         }
@@ -190,6 +191,7 @@ namespace Kieszonstwory.Controllers
                 LokalizacjaId = lokalizacja.Id,
                 Komunikat =komunikat
             };
+            _context.Walka.Add(model);
             _context.SaveChanges();
             return View("Index", model);
         }
