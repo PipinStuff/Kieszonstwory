@@ -45,11 +45,7 @@ namespace Kieszonstwory
 
             app.MapRazorPages();
 
-            using (var scope = app.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                SeedRolesAndAdminAsync(services).GetAwaiter().GetResult();
-            }
+
 
             using (var scope = app.Services.CreateScope())
             {
@@ -62,10 +58,15 @@ namespace Kieszonstwory
                 catch (Exception ex)
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "B³¹d podczas migracji bazy danych");
+                    logger.LogError(ex, "BÂ³Â¹d podczas migracji bazy danych");
                 }
             }
-
+            
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                SeedRolesAndAdminAsync(services).GetAwaiter().GetResult();
+            }
 
 
 
