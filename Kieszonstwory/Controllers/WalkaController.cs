@@ -126,7 +126,7 @@ namespace Kieszonstwory.Controllers
         }
 
         [HttpPost]
-        public IActionResult Lap(DzikiStwor tdziki)
+        public IActionResult Lap(DzikiStwor tdziki,int MojID)
         {
             var dziki = _context.DzikiStwor.FirstOrDefault(x => x.Id == tdziki.Id);
             dziki.HP = tdziki.HP; dziki.Moc = tdziki.Moc; dziki.Poziom = tdziki.Poziom;dziki.BaseHP = tdziki.BaseHP;
